@@ -5,7 +5,7 @@ metadata:
   name: hextris-app
   labels:
     app: hextris-app
-  namespace: lab-jenkins
+  namespace: exam
 spec:
   replicas: 2
   selector:
@@ -29,7 +29,7 @@ metadata:
   name: hextris-app
   labels:
     app: hextris-app
-  namespace: lab-jenkins
+  namespace: exam
 spec:
   type: ClusterIP
   selector:
@@ -43,7 +43,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: hextris-app
-  namespace: lab-jenkins
+  namespace: exam
 spec:
   selector:
     istio: ingressgateway
@@ -53,16 +53,16 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - 'lab-jenkins.appsku.local'
+        - 'exam.appsku.local'
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: hextris-app
-  namespace: lab-jenkins
+  namespace: exam
 spec:
   hosts:
-    - "lab-jenkins.appsku.local"
+    - "exam.appsku.local"
   gateways:
     - hextris-app
   http:
