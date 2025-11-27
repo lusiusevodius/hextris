@@ -70,4 +70,4 @@ spec:
         - destination:
             host: hextris-app
             port:
-              number: 80
+              number: 8080
