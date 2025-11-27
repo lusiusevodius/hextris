@@ -42,7 +42,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: hextris-app
-  namespace: test-jenkins
+  namespace: lab-jenkins
 spec:
   selector:
     istio: ingressgateway
@@ -58,7 +58,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: hextris-app
-  namespace: test-jenkins
+  namespace: lab-jenkins
 spec:
   hosts:
     - "lab-jenkins.appsku.local"
