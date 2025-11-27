@@ -52,7 +52,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - 'test-jenkins.appsku.local'
+        - 'lab-jenkins.appsku.local'
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -61,7 +61,7 @@ metadata:
   namespace: test-jenkins
 spec:
   hosts:
-    - "test-jenkins.appsku.local"
+    - "lab-jenkins.appsku.local"
   gateways:
     - hextris-app
   http:
