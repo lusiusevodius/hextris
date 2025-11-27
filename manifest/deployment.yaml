@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: ct-app
-        image: 28011997/hextris
+        image: 28011997/hextris:v1
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
