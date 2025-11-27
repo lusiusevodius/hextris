@@ -1,4 +1,11 @@
-    FROM ubuntu 
-    RUN apt update -y && apt install nginx -y
-    ADD . /var/www/html/
-    CMD nginx -g "daemon off;"
+FROM node:20-alpine
+
+WORKDIR /app-hextris
+
+RUN npm install -g http-server
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["http-server", ".", "-p", "3000"]

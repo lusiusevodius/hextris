@@ -18,9 +18,9 @@ spec:
     spec:
       containers:
       - name: ct-app
-        image: 28011997/hextris:v1
+        image: 28011997/hextris:v2
         ports:
-        - containerPort: 80
+        - containerPort: 3000
         imagePullPolicy: Always
 ---
 apiVersion: v1
@@ -37,7 +37,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 3000
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
