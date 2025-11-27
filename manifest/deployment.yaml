@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hextris-app
+  labels:
+    app: hextris-app
+  namespace: lab-jenkins
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hextris-app
+  template:
+    metadata:
+      labels:
+        app: hextris-app
+    spec:
+      containers:
+      - name: ct-app
+        image: 28011997/hextris
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hextris-app
+  labels:
+    app: hextris-app
+  namespace: test-jenkins
+spec:
+  type: ClusterIP
+  selector:
+    app: hextris-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: hextris-app
+  namespace: test-jenkins
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - 'test-jenkins.appsku.local'
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: hextris-app
+  namespace: test-jenkins
+spec:
+  hosts:
+    - "test-jenkins.appsku.local"
+  gateways:
+    - hextris-app
+  http:
+    - route:
+        - destination:
+            host: hextris-app
+            port:
+              number: 80
