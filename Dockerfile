@@ -1,4 +1,13 @@
-    FROM ubuntu 
-    RUN apt update -y && apt install nginx -y
-    ADD . /var/www/html/
-    CMD nginx -g "daemon off;"
+FROM nginx:alpine
+
+WORKDIR /usr/share/nginx/html
+
+# Hapus file default nginx
+RUN rm -rf ./*
+
+# Copy semua file Hextris
+COPY . .
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
